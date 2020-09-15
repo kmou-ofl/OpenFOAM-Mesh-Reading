@@ -1,0 +1,163 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  8
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// https://github.com/kmou-ofl/blockMeshHelper
+
+// results of "blockMeshHelper 4 3 2"
+
+x0 0;
+x1 1;
+x2 2;
+x3 3;
+y0 0;
+y1 1;
+y2 2;
+z0 0;
+z1 1;
+
+nx1 1;
+nx2 1;
+nx3 1;
+ny1 1;
+ny2 1;
+nz1 1;
+
+gx1 1;
+gx2 1;
+gx3 1;
+gy1 1;
+gy2 1;
+gz1 1;
+
+vertices
+(
+    name v.x0y0z0 ( $x0 $y0 $z0 )
+    name v.x1y0z0 ( $x1 $y0 $z0 )
+    name v.x2y0z0 ( $x2 $y0 $z0 )
+    name v.x3y0z0 ( $x3 $y0 $z0 )
+    name v.x0y1z0 ( $x0 $y1 $z0 )
+    name v.x1y1z0 ( $x1 $y1 $z0 )
+    name v.x2y1z0 ( $x2 $y1 $z0 )
+    name v.x3y1z0 ( $x3 $y1 $z0 )
+    name v.x0y2z0 ( $x0 $y2 $z0 )
+    name v.x1y2z0 ( $x1 $y2 $z0 )
+    name v.x2y2z0 ( $x2 $y2 $z0 )
+    name v.x3y2z0 ( $x3 $y2 $z0 )
+    name v.x0y0z1 ( $x0 $y0 $z1 )
+    name v.x1y0z1 ( $x1 $y0 $z1 )
+    name v.x2y0z1 ( $x2 $y0 $z1 )
+    name v.x3y0z1 ( $x3 $y0 $z1 )
+    name v.x0y1z1 ( $x0 $y1 $z1 )
+    name v.x1y1z1 ( $x1 $y1 $z1 )
+    name v.x2y1z1 ( $x2 $y1 $z1 )
+    name v.x3y1z1 ( $x3 $y1 $z1 )
+    name v.x0y2z1 ( $x0 $y2 $z1 )
+    name v.x1y2z1 ( $x1 $y2 $z1 )
+    name v.x2y2z1 ( $x2 $y2 $z1 )
+    name v.x3y2z1 ( $x3 $y2 $z1 )
+);
+
+blocks
+(
+    name b.x0y0z0 hex ( v.x0y0z0 v.x1y0z0 v.x1y1z0 v.x0y1z0 v.x0y0z1 v.x1y0z1 v.x1y1z1 v.x0y1z1 ) ( $nx1 $ny1 $nz1 ) simpleGrading ( $gx1 $gy1 $gz1 )
+    name b.x1y0z0 hex ( v.x1y0z0 v.x2y0z0 v.x2y1z0 v.x1y1z0 v.x1y0z1 v.x2y0z1 v.x2y1z1 v.x1y1z1 ) ( $nx2 $ny1 $nz1 ) simpleGrading ( $gx2 $gy1 $gz1 )
+    name b.x2y0z0 hex ( v.x2y0z0 v.x3y0z0 v.x3y1z0 v.x2y1z0 v.x2y0z1 v.x3y0z1 v.x3y1z1 v.x2y1z1 ) ( $nx3 $ny1 $nz1 ) simpleGrading ( $gx3 $gy1 $gz1 )
+    name b.x0y1z0 hex ( v.x0y1z0 v.x1y1z0 v.x1y2z0 v.x0y2z0 v.x0y1z1 v.x1y1z1 v.x1y2z1 v.x0y2z1 ) ( $nx1 $ny2 $nz1 ) simpleGrading ( $gx1 $gy2 $gz1 )
+    name b.x1y1z0 hex ( v.x1y1z0 v.x2y1z0 v.x2y2z0 v.x1y2z0 v.x1y1z1 v.x2y1z1 v.x2y2z1 v.x1y2z1 ) ( $nx2 $ny2 $nz1 ) simpleGrading ( $gx2 $gy2 $gz1 )
+    name b.x2y1z0 hex ( v.x2y1z0 v.x3y1z0 v.x3y2z0 v.x2y2z0 v.x2y1z1 v.x3y1z1 v.x3y2z1 v.x2y2z1 ) ( $nx3 $ny2 $nz1 ) simpleGrading ( $gx3 $gy2 $gz1 )
+);
+
+boundary
+(
+    west
+    {
+        type patch;
+        faces
+        (
+            ( v.x0y0z0 v.x0y1z0 v.x0y1z1 v.x0y0z1 )
+            ( v.x0y1z0 v.x0y2z0 v.x0y2z1 v.x0y1z1 )
+        );
+    }
+    east
+    {
+        type patch;
+        faces
+        (
+            ( v.x3y0z0 v.x3y1z0 v.x3y1z1 v.x3y0z1 )
+            ( v.x3y1z0 v.x3y2z0 v.x3y2z1 v.x3y1z1 )
+        );
+    }
+    south
+    {
+        type patch;
+        faces
+        (
+            ( v.x0y0z0 v.x1y0z0 v.x1y0z1 v.x0y0z1 )
+            ( v.x1y0z0 v.x2y0z0 v.x2y0z1 v.x1y0z1 )
+            ( v.x2y0z0 v.x3y0z0 v.x3y0z1 v.x2y0z1 )
+        );
+    }
+    north
+    {
+        type patch;
+        faces
+        (
+            ( v.x0y2z0 v.x1y2z0 v.x1y2z1 v.x0y2z1 )
+            ( v.x1y2z0 v.x2y2z0 v.x2y2z1 v.x1y2z1 )
+            ( v.x2y2z0 v.x3y2z0 v.x3y2z1 v.x2y2z1 )
+        );
+    }
+    bottom
+    {
+        type patch;
+        faces
+        (
+            ( v.x0y0z0 v.x1y0z0 v.x1y1z0 v.x0y1z0 )
+            ( v.x1y0z0 v.x2y0z0 v.x2y1z0 v.x1y1z0 )
+            ( v.x2y0z0 v.x3y0z0 v.x3y1z0 v.x2y1z0 )
+            ( v.x0y1z0 v.x1y1z0 v.x1y2z0 v.x0y2z0 )
+            ( v.x1y1z0 v.x2y1z0 v.x2y2z0 v.x1y2z0 )
+            ( v.x2y1z0 v.x3y1z0 v.x3y2z0 v.x2y2z0 )
+        );
+    }
+    top
+    {
+        type patch;
+        faces
+        (
+            ( v.x0y0z1 v.x1y0z1 v.x1y1z1 v.x0y1z1 )
+            ( v.x1y0z1 v.x2y0z1 v.x2y1z1 v.x1y1z1 )
+            ( v.x2y0z1 v.x3y0z1 v.x3y1z1 v.x2y1z1 )
+            ( v.x0y1z1 v.x1y1z1 v.x1y2z1 v.x0y2z1 )
+            ( v.x1y1z1 v.x2y1z1 v.x2y2z1 v.x1y2z1 )
+            ( v.x2y1z1 v.x3y1z1 v.x3y2z1 v.x2y2z1 )
+        );
+    }
+    wall
+    {
+        type patch;
+        faces
+        (
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

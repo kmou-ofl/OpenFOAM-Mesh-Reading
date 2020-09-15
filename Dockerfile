@@ -1,7 +1,8 @@
 FROM ubuntu:20.04
 LABEL maintainer="jeon@g.kmou.ac.kr"
 
-ARG dockerusername=ocean
+ARG dockerusername=jwy
+ARG dockeruserid=930213
 
 # 사용자 입력없이 패키지 설치를 진행함
 ENV DEBIAN_FRONTEND noninteractive
@@ -21,7 +22,7 @@ RUN apt install -y gdb
 RUN apt install -y neovim
 
 # user configuration
-RUN useradd -m ${dockerusername}
+RUN useradd -m -u ${dockeruserid} ${dockerusername}
 USER ${dockerusername}
 RUN cp /etc/profile /home/${dockerusername}/.profile
 RUN cp /etc/bash.bashrc /home/${dockerusername}/.bashrc
@@ -35,3 +36,10 @@ RUN sed -i -e "s/WM_COMPILE_OPTION=Opt/WM_COMPILE_OPTION=Debug/g" /home/${docker
 RUN echo "export OMPI_MCA_btl_vader_single_copy_mechanism=none" >> /home/${dockerusername}/.bashrc
 RUN echo "source /home/${dockerusername}/OpenFOAM/OpenFOAM-8/etc/bashrc" >> /home/${dockerusername}/.bashrc
 RUN bash -c -i "/home/${dockerusername}/OpenFOAM/OpenFOAM-8/Allwmake -j"
+
+# run tutorial
+RUN bash -c -i "mkdir -p $FOAM_RUN"
+COPY tutorial /home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial
+WORKDIR /home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial
+RUN bash -c -i "/home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial/Allrun"
+CMD ["gdb", "laplaciamFoam"]

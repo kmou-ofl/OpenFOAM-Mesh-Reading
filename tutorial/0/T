@@ -9,40 +9,31 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "system";
-    object      controlDict;
+    class       volScalarField;
+    object      T;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application laplacianFoam;
+dimensions      [0 0 0 1 0 0 0];
 
-startFrom startTime;
+internalField   uniform 273;
 
-stopAt endTime;
+boundaryField
+{
 
-startTime 0;
+    //- Set patchGroups for constraint patches
+    #includeEtc "caseDicts/setConstraintTypes"
 
-endTime 10;
+    west
+    {
+        type            fixedValue;
+        value           uniform 573;
+    }
 
-deltaT 1;
-
-writeControl timeStep;
-
-writeInterval 1;
-
-purgeWrite 0;
-
-writeFormat ascii;
-
-writePrecision 6;
-
-writeCompression off;
-
-timeFormat general;
-
-timePrecision 6;
-
-runTimeModifiable true;
+    east
+    {
+        type            zeroGradient;
+    }
+}
 
 // ************************************************************************* //

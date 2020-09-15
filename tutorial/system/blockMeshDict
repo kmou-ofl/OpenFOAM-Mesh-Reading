@@ -103,7 +103,7 @@ boundary
     }
     south
     {
-        type patch;
+        type symmetryPlane;
         faces
         (
             ( v.x0y0z0 v.x1y0z0 v.x1y0z1 v.x0y0z1 )
@@ -113,7 +113,7 @@ boundary
     }
     north
     {
-        type patch;
+        type symmetryPlane;
         faces
         (
             ( v.x0y2z0 v.x1y2z0 v.x1y2z1 v.x0y2z1 )
@@ -123,7 +123,7 @@ boundary
     }
     bottom
     {
-        type patch;
+        type empty;
         faces
         (
             ( v.x0y0z0 v.x1y0z0 v.x1y1z0 v.x0y1z0 )
@@ -136,7 +136,7 @@ boundary
     }
     top
     {
-        type patch;
+        type empty;
         faces
         (
             ( v.x0y0z1 v.x1y0z1 v.x1y1z1 v.x0y1z1 )
@@ -145,13 +145,6 @@ boundary
             ( v.x0y1z1 v.x1y1z1 v.x1y2z1 v.x0y2z1 )
             ( v.x1y1z1 v.x2y1z1 v.x2y2z1 v.x1y2z1 )
             ( v.x2y1z1 v.x3y1z1 v.x3y2z1 v.x2y2z1 )
-        );
-    }
-    wall
-    {
-        type patch;
-        faces
-        (
         );
     }
 );

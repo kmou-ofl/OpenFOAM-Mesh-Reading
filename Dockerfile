@@ -38,8 +38,8 @@ RUN echo "source /home/${dockerusername}/OpenFOAM/OpenFOAM-8/etc/bashrc" >> /hom
 RUN bash -c -i "/home/${dockerusername}/OpenFOAM/OpenFOAM-8/Allwmake -j"
 
 # run tutorial
-RUN bash -c -i "mkdir -p $FOAM_RUN"
+RUN bash -c -i "mkdir -p \$FOAM_RUN"
 COPY tutorial /home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial
 WORKDIR /home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial
-RUN bash -c -i "/home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial/Allrun"
+RUN bash -c -i "/home/\${dockerusername}/OpenFOAM/\${dockerusername}-8/run/tutorial/Allrun"
 CMD ["gdb", "laplaciamFoam"]

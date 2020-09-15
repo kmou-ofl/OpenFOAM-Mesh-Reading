@@ -41,6 +41,5 @@ RUN bash -c -i "/home/${dockerusername}/OpenFOAM/OpenFOAM-8/Allwmake -j"
 RUN bash -c -i "mkdir -p \$FOAM_RUN"
 COPY --chown=${dockerusername}  tutorial /home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial
 WORKDIR /home/${dockerusername}/OpenFOAM/${dockerusername}-8/run/tutorial
-RUN chmod +x ./Allrun
-RUN bash -c -i "./Allrun"
-CMD ["gdb", "laplaciamFoam"]
+RUN bash -c -i "blockMesh"
+CMD ["gdb", "laplacianFoam"]

@@ -113,7 +113,7 @@ boundary
     }
     north
     {
-        type symmetryPlane;
+        type wall;
         faces
         (
             ( v.x0y2z0 v.x1y2z0 v.x1y2z1 v.x0y2z1 )
